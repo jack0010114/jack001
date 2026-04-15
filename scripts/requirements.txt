@@ -1,5 +1,3 @@
-# Python Dependencies
-
 requests
 pandas
 beautifulsoup4
@@ -7,4 +5,4 @@ numpy
 matplotlib
 seaborn
 scipy
-sklearn
+scikit-learn
