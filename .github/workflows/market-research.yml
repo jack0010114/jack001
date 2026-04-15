@@ -1,0 +1,35 @@
+name: Market Research Agent
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 每天9点运行
+  workflow_dispatch:
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r scripts/requirements.txt
+      
+      - name: Run Market Research
+        run: |
+          python3 scripts/market_research.py --analyze-competitors
+      
+      - name: Generate Report
+        run: |
+          python3 scripts/market_research.py --generate-report
+      
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: market-research-report
+          path: reports/
